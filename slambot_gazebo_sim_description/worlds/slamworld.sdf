@@ -1,0 +1,173 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="slamworld">
+    <!-- 물리/시간: 안정적인 스텝 -->
+    <physics name="default_physics" type="dartsim">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- 조명 -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -1</direction>
+      <attenuation>
+        <range>100</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+    </light>
+
+    <!-- 바닥(평면) -->
+    <model name="ground">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="ground_link">
+        <collision name="ground_col">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>50 50</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="ground_vis">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>50 50</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- SLAM용 환경: 외곽 + 내부 벽 + 랜드마크 기둥 -->
+    <model name="slam_lab_env">
+      <static>true</static>
+
+      <!-- 공통 파라미터: 벽 높이/두께 -->
+      <!-- h=1.5m, t=0.1m. z는 항상 h/2 = 0.75 로 배치 -->
+
+      <!-- 외곽 경계: 10 x 10 m 박스 -->
+      <link name="wall_n">
+        <pose>0 5 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>10 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>10 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.9 1</diffuse></material></visual>
+      </link>
+      <link name="wall_s">
+        <pose>0 -5 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>10 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>10 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.9 1</diffuse></material></visual>
+      </link>
+      <link name="wall_e">
+        <pose>5 0 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.1 10 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 10 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.9 1</diffuse></material></visual>
+      </link>
+      <link name="wall_w">
+        <pose>-5 0 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.1 10 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 10 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.7 0.9 1</diffuse></material></visual>
+      </link>
+
+      <!-- 내부 세로 벽 (x=-2), 문폭 0.8m를 중심(y=0)으로 비움 -->
+      <!-- 총 길이 9.0m -> 상/하 4.1m씩 -->
+      <link name="wall_v_top">
+        <pose>-2 2.45 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.1 4.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 4.1 1.5</size></box></geometry>
+          <material><diffuse>0.9 0.7 0.7 1</diffuse></material></visual>
+      </link>
+      <link name="wall_v_bot">
+        <pose>-2 -2.45 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.1 4.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 4.1 1.5</size></box></geometry>
+          <material><diffuse>0.9 0.7 0.7 1</diffuse></material></visual>
+      </link>
+
+      <!-- 내부 가로 벽 (y=0), 문폭 0.8m를 x≈2에 비움 -->
+      <link name="wall_h_left">
+        <pose>-1.7 0 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>6.6 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>6.6 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.9 0.7 1</diffuse></material></visual>
+      </link>
+      <link name="wall_h_right">
+        <pose>3.7 0 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>2.6 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>2.6 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.7 0.9 0.7 1</diffuse></material></visual>
+      </link>
+
+      <!-- 북동쪽 작은 방(비대칭 포인트) -->
+      <link name="room_ne_v">
+        <pose>2 2.5 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.1 4.0 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 4.0 1.5</size></box></geometry>
+          <material><diffuse>0.9 0.85 0.6 1</diffuse></material></visual>
+      </link>
+      <link name="room_ne_top">
+        <pose>3.25 4.5 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>2.5 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>2.5 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.9 0.85 0.6 1</diffuse></material></visual>
+      </link>
+      <!-- 아래쪽 벽: x=2.8~4.5 로 두어 폭 0.8m 문 at x~2 -->
+      <link name="room_ne_bottom">
+        <pose>3.35 0.5 0.75 0 0 0</pose>
+        <collision name="col"><geometry><box><size>1.7 0.1 1.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>1.7 0.1 1.5</size></box></geometry>
+          <material><diffuse>0.9 0.85 0.6 1</diffuse></material></visual>
+      </link>
+
+      <!-- Landmark: 기둥 3개 (0.3 x 0.3 x 1.0 m) -->
+      <link name="pillar_1">
+        <pose>-3 -3 0.5 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.3 0.3 1.0</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.3 0.3 1.0</size></box></geometry>
+          <material><diffuse>0.6 0.8 0.9 1</diffuse></material></visual>
+      </link>
+      <link name="pillar_2">
+        <pose>3 -3 0.5 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.3 0.3 1.0</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.3 0.3 1.0</size></box></geometry>
+          <material><diffuse>0.9 0.6 0.8 1</diffuse></material></visual>
+      </link>
+      <link name="pillar_3">
+        <pose>-3 3 0.5 0 0 0</pose>
+        <collision name="col"><geometry><box><size>0.3 0.3 1.0</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.3 0.3 1.0</size></box></geometry>
+          <material><diffuse>0.6 0.9 0.6 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- GUI 카메라 초기 위치(선택) -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>0 -12 6 0.5 0.3 0</pose>
+      </camera>
+    </gui>
+  </world>
+</sdf>

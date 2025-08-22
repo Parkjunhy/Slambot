@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<robot name="slambot_gazebo_sim" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="slambot_gazebo_sim" params="prefix">
+
+<xacro:include filename="$(find slambot_gazebo_sim_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find slambot_gazebo_sim_description)/urdf/slambot_gazebo_sim.trans" />
+<xacro:include filename="$(find slambot_gazebo_sim_description)/urdf/slambot_gazebo_sim.gazebo" />
+
+<link name="${prefix}base_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1.0"/>
+    <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}FL_wheel">
+  <inertial>
+    <origin xyz="-6.938893903907228e-18 0.011499999776482576 -6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="0.075"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/FL_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/FL_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}BL_wheel">
+  <inertial>
+    <origin xyz="0.0 0.011499999776482604 -6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="0.075"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/BL_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/BL_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}FR_wheel">
+  <inertial>
+    <origin xyz="6.938893903907228e-17 -0.011499999776482757 -1.700029006457271e-16" rpy="0 0 0"/>
+    <mass value="0.075"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/FR_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/FR_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}BR_wheel">
+  <inertial>
+    <origin xyz="-2.3681641159872813e-07 -0.011499999776482618 3.469446951953614e-18" rpy="0 0 0"/>
+    <mass value="0.075"/>
+    <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/BR_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/BR_wheel.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}Lidar">
+  <inertial>
+    <origin xyz="0.0 0.0 0.029000013286372167" rpy="0 0 0"/>
+    <mass value="1.7521997405948053"/>
+    <inertia ixx="0.001028" iyy="0.001028" izz="0.001073" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/Lidar.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find slambot_gazebo_sim_description)/meshes/Lidar.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="${prefix}sensor_box">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.001"/>
+    <inertia
+      ixx="1.403e-07" iyy="3.767e-08" izz="1.777e-07"
+      ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.015 0.029 0.001"/>
+    </geometry>
+    <material name="slambot_gazebo_sim_silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.015 0.029 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="${prefix}FL_joint" type="continuous">
+  <origin xyz="0.058 0.05705 0.0221" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}FL_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <dynamics damping="0.1" friction="0.0"/>
+</joint>
+
+<joint name="${prefix}BL_joint" type="continuous">
+  <origin xyz="-0.055 0.05705 0.0221" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}BL_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <dynamics damping="0.1" friction="0.0"/>
+</joint>
+
+<joint name="${prefix}FR_joint" type="continuous">
+  <origin xyz="0.058 -0.05705 0.0221" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}FR_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <dynamics damping="0.1" friction="0.0"/>
+</joint>
+
+<joint name="${prefix}BR_joint" type="continuous">
+  <origin xyz="-0.055 -0.05705 0.0221" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}BR_wheel"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <dynamics damping="0.1" friction="0.0"/>
+</joint>
+
+<joint name="${prefix}Lidar_joint" type="continuous">
+  <origin xyz="-0.0785 0.0 0.118031" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}Lidar"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="${prefix}sensor_box_joint" type="fixed">
+  <origin xyz="0 0 0.065" rpy="0 0 0"/>
+  <parent link="${prefix}base_link"/>
+  <child link="${prefix}sensor_box"/>
+  <preserveFixedJoint>true</preserveFixedJoint>
+</joint>
+
+</xacro:macro>
+
+<xacro:slambot_gazebo_sim prefix=""/>
+
+</robot>

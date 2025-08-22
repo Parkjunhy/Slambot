@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<robot name="slambot_gazebo_sim" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<material name="slambot_gazebo_sim_silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<material name="slambot_gazebo_sim_gold">
+  <color rgba="0.300 0.100 0.100 1.000"/>
+</material>
+
+</robot>

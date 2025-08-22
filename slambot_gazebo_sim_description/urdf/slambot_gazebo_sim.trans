@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<robot name="slambot_gazebo_sim" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="${prefix}FL_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="FL_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="FL_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="${prefix}BL_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="BL_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="BL_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="${prefix}FR_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="FR_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="FR_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="${prefix}BR_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="BR_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="BR_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="${prefix}Lidar_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Lidar_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Lidar_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>
