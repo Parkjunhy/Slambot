@@ -11,19 +11,20 @@ def generate_launch_description():
     robotXacroName = 'slambot_gazebo_sim'
     namePackage = 'slambot_gazebo_sim_description'
     modelFileRelativePath = 'urdf/slambot_gazebo_sim.xacro'
-    # pathWorldFile = 'worlds/slamworld.sdf'
+    pathWorldFile = os.path.join(get_package_share_directory(namePackage), 'worlds', 'slamworld.sdf')
 
     pathModelFile = os.path.join(get_package_share_directory(namePackage),modelFileRelativePath)
     robotDescription = xacro.process_file(pathModelFile).toxml()
+    rviz_config_file = os.path.join(get_package_share_directory(namePackage), 'config', 'display.rviz')
 
     gazebo_rosPackageLaunch = PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('ros_gz_sim'),
                                                                'launch', 'gz_sim.launch.py'))
     
-    # gazeboLaunch = IncludeLaunchDescription(gazebo_rosPackageLaunch, 
-    #                                         launch_arguments={'gz_args': f'-r {pathWorldFile}', 'on_exit_shutdown' : 'true'}.items())
     gazeboLaunch = IncludeLaunchDescription(gazebo_rosPackageLaunch, 
-                                            launch_arguments={'gz_args': ['-r -v -v4 empty.sdf'], 'on_exit_shutdown' : 'true'}.items())
-
+                                            launch_arguments={'gz_args': f'-r -v4 {pathWorldFile}', 'on_exit_shutdown' : 'true'}.items())  
+    # gazeboLaunch = IncludeLaunchDescription(gazebo_rosPackageLaunch, 
+    #                                         launch_arguments={'gz_args': ['-r -v -v4 empty.sdf'], 'on_exit_shutdown' : 'true'}.items())
+    
     spawnModelNodeGazebo = Node(
         package='ros_gz_sim',
         executable='create',
@@ -47,6 +48,7 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen',
+        parameters=[{'use_sim_time': True}],
     )
 
     bridge_params = os.path.join(
@@ -64,6 +66,24 @@ def generate_launch_description():
         f'config_file:={bridge_params}',
         ],
         output='screen',
+        parameters=[{'use_sim_time': True}],
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', rviz_config_file],
+        parameters=[{'use_sim_time': True}],
+    )
+
+    static_lidar_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0', '0', '0', '0', '0', '0', '1',
+                'base_link', 'slambot_gazebo_sim/base_link/gpu_lidar'],
+        name='static_lidar_tf'
     )
 
     LaunchDescriptionObject = LaunchDescription()
@@ -72,6 +92,8 @@ def generate_launch_description():
     LaunchDescriptionObject.add_action(robot_state_publisher_node)
     LaunchDescriptionObject.add_action(joint_state_publisher_node)
     LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
+    LaunchDescriptionObject.add_action(rviz_node)
+    LaunchDescriptionObject.add_action(static_lidar_tf)
 
     return LaunchDescriptionObject
 # Hi

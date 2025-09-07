@@ -7,8 +7,8 @@ class SpeedMode:
 
 @dataclass(frozen=True)
 class TeleopParams:
-    mode1 = SpeedMode(v_max=0.6, w_max=1.8)
-    mode2 = SpeedMode(v_max=1.0, w_max=2.0)
+    mode1 = SpeedMode(v_max=2.0, w_max=1.8)
+    mode2 = SpeedMode(v_max=4.0, w_max=2.0)
     start_mode: int = 2
     accel_lin: float = 1.2   # m/s^2
     accel_ang: float = 3.6   # rad/s^2
