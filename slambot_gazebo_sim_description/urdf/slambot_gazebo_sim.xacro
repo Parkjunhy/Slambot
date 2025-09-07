@@ -188,7 +188,7 @@
   <dynamics damping="0.1" friction="0.0"/>
 </joint>
 
-<joint name="${prefix}Lidar_joint" type="continuous">
+<joint name="${prefix}Lidar_joint" type="fixed">
   <origin xyz="-0.0785 0.0 0.118031" rpy="0 0 0"/>
   <parent link="${prefix}base_link"/>
   <child link="${prefix}Lidar"/>
