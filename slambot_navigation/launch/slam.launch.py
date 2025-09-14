@@ -7,7 +7,7 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    pkg = 'slambot_gazebo_sim_description'
+    pkg = 'slambot_navigation'
     share = get_package_share_directory(pkg)
 
     slam_params = os.path.join(share, 'config', 'slam_toolbox_parameters.yaml')

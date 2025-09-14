@@ -53,14 +53,6 @@
   <self_collide>true</self_collide>
 </gazebo>
 
-<!-- PLUGIN DATA
-<gazebo>
-  <plugin
-    filename="gz-sim-sensors-system"
-    name="gz::sim::systems::Sensors">
-    <render_engine>ogre2</render_engine>
-  </plugin>
-</gazebo> -->
 
 <gazebo reference="Lidar">
   <sensor name='gpu_lidar' type='gpu_lidar'>
@@ -120,26 +112,12 @@
   </sensor>
 </gazebo>
 
-<!-- <gazebo>
-  <plugin
-    filename="gz-sim-diff-drive-system"
-    name="gz::sim::systems::DiffDrive">
-    <left_joint>BL_joint</left_joint>
-    <right_joint>BR_joint</right_joint>
-    <wheel_separation>0.15</wheel_separation>
-    <wheel_radius>0.31</wheel_radius>
-    <odom_publish_frequency>1</odom_publish_frequency>
-    <topic>cmd_vel</topic>
-  </plugin>
-</gazebo>
- -->
-
 <gazebo>
   <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
     <left_joint>BL_joint</left_joint>
     <right_joint>BR_joint</right_joint>
     <wheel_separation>0.15</wheel_separation>
-    <wheel_radius>0.31</wheel_radius>
+    <wheel_radius>0.031</wheel_radius>
 
     <topic>cmd_vel</topic>
     <odom_topic>odom</odom_topic>
