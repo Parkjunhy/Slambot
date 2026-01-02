@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="simple_test_world_v2">
+    <physics name="default_physics" type="tpe">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <light name="sun_main" type="directional">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -1</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="corner_pillar_room">
+      <static>true</static>
+      <link name="structure">
+        <visual name="wall_n"><pose>2.5 0 0.5 0 0 0</pose><geometry><box><size>0.1 5 1</size></box></geometry></visual>
+        <visual name="wall_s"><pose>-2.5 0 0.5 0 0 0</pose><geometry><box><size>0.1 5 1</size></box></geometry></visual>
+        <visual name="wall_e"><pose>0 2.5 0.5 0 0 0</pose><geometry><box><size>5 0.1 1</size></box></geometry></visual>
+        <visual name="wall_w"><pose>0 -2.5 0.5 0 0 0</pose><geometry><box><size>5 0.1 1</size></box></geometry></visual>
+        
+        <collision name="wall_n_col"><pose>2.5 0 0.5 0 0 0</pose><geometry><box><size>0.1 5 1</size></box></geometry></collision>
+        <collision name="wall_s_col"><pose>-2.5 0 0.5 0 0 0</pose><geometry><box><size>0.1 5 1</size></box></geometry></collision>
+        <collision name="wall_e_col"><pose>0 2.5 0.5 0 0 0</pose><geometry><box><size>5 0.1 1</size></box></geometry></collision>
+        <collision name="wall_w_col"><pose>0 -2.5 0.5 0 0 0</pose><geometry><box><size>5 0.1 1</size></box></geometry></collision>
+
+        <visual name="p_ne"><pose>2.1 2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry><material><diffuse>0.3 0.3 0.7 1</diffuse></material></visual>
+        <collision name="p_ne_col"><pose>2.1 2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry></collision>
+
+        <visual name="p_nw"><pose>2.1 -2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry><material><diffuse>0.3 0.3 0.7 1</diffuse></material></visual>
+        <collision name="p_nw_col"><pose>2.1 -2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry></collision>
+
+        <visual name="p_se"><pose>-2.1 2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry><material><diffuse>0.3 0.3 0.7 1</diffuse></material></visual>
+        <collision name="p_se_col"><pose>-2.1 2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry></collision>
+
+        <visual name="p_sw"><pose>-2.1 -2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry><material><diffuse>0.3 0.3 0.7 1</diffuse></material></visual>
+        <collision name="p_sw_col"><pose>-2.1 -2.1 0.5 0 0 0</pose><geometry><box><size>0.4 0.4 1</size></box></geometry></collision>
+      </link>
+    </model>
+  </world>
+</sdf>
