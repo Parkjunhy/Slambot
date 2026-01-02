@@ -67,3 +67,59 @@ slam_toolbox:
     min_pass_through: 2
     debug_logging: false
     enable_interactive_mode: true
+    ceres_num_threads: 12
+
+
+# slam_toolbox:
+#   ros__parameters:
+#     use_sim_time: true
+#     mode: mapping
+
+#     map_frame: map
+#     odom_frame: odom
+#     base_frame: base_link
+#     scan_topic: /scan
+#     odom_topic: /odom
+
+#     # 시간 여유를 넉넉히
+#     transform_timeout: 1.5
+#     tf_buffer_duration: 120.0
+#     map_update_interval: 0.8
+#     minimum_time_interval: 0.05
+
+#     # 맵/라이다
+#     resolution: 0.05
+#     min_laser_range: 0.05
+#     max_laser_range: 5.0         # 일단 5m로 보수화 (탐색 범위 축소)
+#     occupancy_threshold: 0.50
+
+#     # 키프레임 간격 크게 → 누적오차 전파 억제
+#     minimum_travel_distance: 0.20
+#     minimum_travel_heading: 0.15
+#     scan_queue_size: 5
+#     scan_buffer_size: 12
+#     scan_buffer_maximum_scan_distance: 6.0
+
+#     # 매칭/링킹 보수화
+#     use_scan_matching: true
+#     use_scan_barycenter: false
+#     link_scan_maximum_distance: 0.5
+#     link_match_minimum_response_fine: 0.25
+
+#     # 루프클로징 완전 OFF (원인 격리)
+#     do_loop_closing: false
+
+#     # 상관탐색창 축소
+#     correlation_search_space_dimension: 0.25
+#     correlation_search_space_resolution: 0.01
+#     correlation_search_space_smear_deviation: 0.08
+
+#     # 패널티 상향 (멀리/많이 틀어진 해 거부)
+#     distance_variance_penalty: 1.0
+#     angle_variance_penalty: 1.4
+#     minimum_angle_penalty: 1.0
+#     minimum_distance_penalty: 0.8
+
+#     use_response_expansion: true
+#     throttle_scans: 1
+#     debug_logging: true

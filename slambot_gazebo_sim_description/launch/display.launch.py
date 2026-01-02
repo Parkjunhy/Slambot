@@ -11,7 +11,7 @@ def generate_launch_description():
     robotXacroName = 'slambot_gazebo_sim'
     namePackage = 'slambot_gazebo_sim_description'
     modelFileRelativePath = 'urdf/slambot_gazebo_sim.xacro'
-    pathWorldFile = os.path.join(get_package_share_directory(namePackage), 'worlds', 'slamworld.sdf')
+    pathWorldFile = os.path.join(get_package_share_directory(namePackage), 'worlds', 'mapworld.sdf')
 
     pathModelFile = os.path.join(get_package_share_directory(namePackage),modelFileRelativePath)
     robotDescription = xacro.process_file(pathModelFile).toxml()
