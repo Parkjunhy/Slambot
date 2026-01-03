@@ -86,6 +86,25 @@ def generate_launch_description():
         name='static_lidar_tf'
     )
 
+    static_imu_tf = Node(
+    package='tf2_ros',
+    executable='static_transform_publisher',
+    arguments=['0', '0', '0', '0', '0', '0', '1',
+               'base_link', 'slambot_gazebo_sim/base_link/imu_sensor'],
+    name='static_imu_tf'
+    )
+
+    ekf_node = Node(
+    package='robot_localization',
+    executable='ekf_node',
+    name='ekf_filter_node',
+    output='screen',
+    parameters=['/home/jh/slambot_project/src/slambot_gazebo_sim_description/config/ekf.yaml'],
+    # 필요하면 remap 가능
+    # remappings=[('/odometry/filtered', '/odometry/filtered')]
+    )
+
+
     LaunchDescriptionObject = LaunchDescription()
     LaunchDescriptionObject.add_action(gazeboLaunch)
     LaunchDescriptionObject.add_action(spawnModelNodeGazebo)
@@ -94,6 +113,8 @@ def generate_launch_description():
     LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
     LaunchDescriptionObject.add_action(rviz_node)
     LaunchDescriptionObject.add_action(static_lidar_tf)
+    LaunchDescriptionObject.add_action(static_imu_tf)
+    LaunchDescriptionObject.add_action(ekf_node)
 
     return LaunchDescriptionObject
 # Hi
