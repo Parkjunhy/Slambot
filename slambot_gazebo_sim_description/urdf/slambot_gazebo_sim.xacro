@@ -30,7 +30,7 @@
 
 <link name="${prefix}FL_wheel">
   <inertial>
-    <origin xyz="-6.938893903907228e-18 0.011499999776482576 -6.938893903907228e-18" rpy="0 0 0"/>
+    <origin xyz="0 0.0115 0" rpy="0 0 0"/>
     <mass value="0.075"/>
     <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -51,7 +51,7 @@
 
 <link name="${prefix}BL_wheel">
   <inertial>
-    <origin xyz="0.0 0.011499999776482604 -6.938893903907228e-18" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0115 0" rpy="0 0 0"/>
     <mass value="0.075"/>
     <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
   </inertial>
@@ -72,7 +72,7 @@
 
 <link name="${prefix}FR_wheel">
   <inertial>
-    <origin xyz="6.938893903907228e-17 -0.011499999776482757 -1.700029006457271e-16" rpy="0 0 0"/>
+    <origin xyz="0 -0.0115 0" rpy="0 0 0"/>
     <mass value="0.075"/>
     <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
   </inertial>
@@ -93,7 +93,7 @@
 
 <link name="${prefix}BR_wheel">
   <inertial>
-    <origin xyz="-2.3681641159872813e-07 -0.011499999776482618 3.469446951953614e-18" rpy="0 0 0"/>
+    <origin xyz="0 -0.0115 0" rpy="0 0 0"/>
     <mass value="0.075"/>
     <inertia ixx="2.4e-05" iyy="4.1e-05" izz="2.4e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -114,8 +114,8 @@
 
 <link name="${prefix}Lidar">
   <inertial>
-    <origin xyz="0.0 0.0 0.029000013286372167" rpy="0 0 0"/>
-    <mass value="1.7521997405948053"/>
+    <origin xyz="0.0 0.0 0.029" rpy="0 0 0"/>
+    <mass value="1.0"/>
     <inertia ixx="0.001028" iyy="0.001028" izz="0.001073" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>

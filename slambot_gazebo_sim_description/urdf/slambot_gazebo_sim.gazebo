@@ -5,16 +5,16 @@
 
 <gazebo reference="base_link">
   <material>${body_color}</material>
-  <mu1>1.0</mu1>
-  <mu2>1.0</mu2>
+  <mu1>0.8</mu1>
+  <mu2>0.8</mu2>
   <self_collide>true</self_collide>
   <gravity>true</gravity>
 </gazebo>
 
 <gazebo reference="FL_wheel">
   <material>${body_color}</material>
-  <mu1>1.0</mu1>
-  <mu2>1.0</mu2>
+  <mu1>0.8</mu1>
+  <mu2>0.8</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
@@ -27,8 +27,8 @@
 
 <gazebo reference="FR_wheel">
   <material>${body_color}</material>
-  <mu1>1.0</mu1>
-  <mu2>1.0</mu2>
+  <mu1>0.8</mu1>
+  <mu2>0.8</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
@@ -126,5 +126,3 @@
 </gazebo>
 
 </robot>
-
-
