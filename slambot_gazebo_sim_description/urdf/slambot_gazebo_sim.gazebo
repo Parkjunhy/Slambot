@@ -5,37 +5,37 @@
 
 <gazebo reference="base_link">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
   <self_collide>true</self_collide>
   <gravity>true</gravity>
 </gazebo>
 
 <gazebo reference="FL_wheel">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <gazebo reference="BL_wheel">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <gazebo reference="FR_wheel">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
 <gazebo reference="BR_wheel">
   <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
   <self_collide>true</self_collide>
 </gazebo>
 
@@ -73,12 +73,6 @@
                 <min_angle>-3.14</min_angle>
                 <max_angle>3.14</max_angle>
             </horizontal>
-            <!-- <vertical>
-                <samples>1</samples>
-                <resolution>0.01</resolution>
-                <min_angle>0</min_angle>
-                <max_angle>0</max_angle>
-            </vertical> -->
         </scan>
         <range>
             <min>0.01</min>
@@ -96,6 +90,8 @@
     <visualize>1</visualize>
   </sensor>
 </gazebo>
+
+
 
 <gazebo>
   <plugin filename="gz-sim-imu-system"
@@ -125,7 +121,7 @@
     <child_frame_id>base_link</child_frame_id>
     <odom_publisher_frequency>30</odom_publisher_frequency>
 
-    <tf_topic>tf</tf_topic>
+    <!-- <tf_topic>tf</tf_topic> -->
   </plugin>
 </gazebo>
 
