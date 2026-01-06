@@ -61,7 +61,7 @@
       name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <frame_id>lidar_link</frame_id>
+    <frame_id>Lidar</frame_id>
     <pose relative_to='Lidar'>0 0 0.05 0 0 0</pose>
     <topic>scan</topic>
     <update_rate>30</update_rate>
