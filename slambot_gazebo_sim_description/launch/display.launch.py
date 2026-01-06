@@ -87,9 +87,9 @@ def generate_launch_description():
     )
 
     static_imu_tf = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    arguments=['0', '0', '0', '0', '0', '0', '1',
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0', '0', '0', '0', '0', '0', '1',
                'base_link', 'slambot_gazebo_sim/base_link/imu_sensor'],
     name='static_imu_tf'
     )
