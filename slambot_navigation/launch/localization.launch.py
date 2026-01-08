@@ -9,7 +9,6 @@ from launch_ros.substitutions import FindPackageShare
 from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
-    # 1. 경로 및 변수 설정 (오픈소스 스타일)
     slambot_nav_pkg = FindPackageShare('slambot_navigation')
     
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -17,8 +16,6 @@ def generate_launch_description():
     params_file = LaunchConfiguration('params_file')
     autostart = LaunchConfiguration('autostart')
     
-    # 2. 파라미터 재작성 (Sim Time 적용)
-    # 맵 파일 경로는 여기서 섞지 않습니다! (경로 깨짐 방지)
     param_substitutions = {
         'use_sim_time': use_sim_time
     }
@@ -46,7 +43,6 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument('autostart', default_value='true'),
 
-        # 3. Map Server (파라미터 독립 주입)
         Node(
             package='nav2_map_server',
             executable='map_server',
@@ -58,7 +54,6 @@ def generate_launch_description():
             ]
         ),
         
-        # 4. AMCL
         Node(
             package='nav2_amcl',
             executable='amcl',
@@ -67,7 +62,6 @@ def generate_launch_description():
             parameters=[configured_params]
         ),
         
-        # 5. Lifecycle Manager
         Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',

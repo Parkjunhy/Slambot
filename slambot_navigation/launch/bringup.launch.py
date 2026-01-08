@@ -7,18 +7,14 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
-    # 1. 패키지 경로 찾기 (FindPackageShare 사용)
     slambot_nav_pkg = FindPackageShare('slambot_navigation')
     
-    # 2. 기본 파일 경로 설정 (PathJoinSubstitution 사용 - 이게 오픈소스 방식)
     default_map_file = PathJoinSubstitution([slambot_nav_pkg, 'maps', 'mape_new.yaml'])
     default_params_file = PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params.yaml'])
     
-    # 3. 런치 파일 경로
     localization_launch_path = PathJoinSubstitution([slambot_nav_pkg, 'launch', 'localization.launch.py'])
     navigation_launch_path = PathJoinSubstitution([slambot_nav_pkg, 'launch', 'navigation.launch.py'])
 
-    # 4. 실행 인수
     map_file = LaunchConfiguration('map')
     params_file = LaunchConfiguration('params_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -42,7 +38,6 @@ def generate_launch_description():
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         DeclareLaunchArgument('autostart', default_value='true'),
 
-        # 5. Localization 실행
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(localization_launch_path),
             launch_arguments={
@@ -53,7 +48,6 @@ def generate_launch_description():
             }.items()
         ),
 
-        # 6. Navigation 실행
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(navigation_launch_path),
             launch_arguments={

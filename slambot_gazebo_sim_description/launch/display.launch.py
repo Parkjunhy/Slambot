@@ -100,8 +100,6 @@ def generate_launch_description():
     name='ekf_filter_node',
     output='screen',
     parameters=['/home/jh/slambot_project/src/slambot_gazebo_sim_description/config/ekf.yaml'],
-    # 필요하면 remap 가능
-    # remappings=[('/odometry/filtered', '/odometry/filtered')]
     )
 
 
