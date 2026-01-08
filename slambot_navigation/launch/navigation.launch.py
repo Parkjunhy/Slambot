@@ -8,16 +8,12 @@ from launch_ros.substitutions import FindPackageShare
 from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
-    # 1. 경로 설정 (하드코딩 제거 -> 표준 방식 적용)
     slambot_nav_pkg = FindPackageShare('slambot_navigation')
 
     use_sim_time = LaunchConfiguration('use_sim_time')
     params_file = LaunchConfiguration('params_file')
     autostart = LaunchConfiguration('autostart')
 
-    # 2. 파라미터 재작성 (RewrittenYaml)
-    # Navigation 노드들은 상대 경로 파일(이미지 등)을 쓰지 않으므로
-    # RewrittenYaml을 사용하는 것이 올바른 방법입니다.
     param_substitutions = {
         'use_sim_time': use_sim_time
     }
@@ -36,8 +32,6 @@ def generate_launch_description():
                        'waypoint_follower',
                        'velocity_smoother']
 
-    # 3. 리매핑 설정 (핑크봇 스타일: 스무더 적용)
-    # controller_server -> cmd_vel_nav -> velocity_smoother -> cmd_vel
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')]
 
@@ -54,7 +48,6 @@ def generate_launch_description():
 
         DeclareLaunchArgument('autostart', default_value='true'),
 
-        # 1. Controller Server
         Node(
             package='nav2_controller',
             executable='controller_server',
@@ -62,7 +55,6 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings + [('cmd_vel', 'cmd_vel_nav')]
         ),
-        # 2. Planner Server
         Node(
             package='nav2_planner',
             executable='planner_server',
@@ -71,7 +63,6 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings
         ),
-        # 3. Behavior Server
         Node(
             package='nav2_behaviors',
             executable='behavior_server',
@@ -80,7 +71,6 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings
         ),
-        # 4. BT Navigator
         Node(
             package='nav2_bt_navigator',
             executable='bt_navigator',
@@ -89,7 +79,6 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings
         ),
-        # 5. Waypoint Follower
         Node(
             package='nav2_waypoint_follower',
             executable='waypoint_follower',
@@ -98,7 +87,6 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings
         ),
-        # 6. Velocity Smoother (필수)
         Node(
             package='nav2_velocity_smoother',
             executable='velocity_smoother',
@@ -108,7 +96,6 @@ def generate_launch_description():
             remappings=remappings +
                     [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel')]
         ),
-        # 7. Lifecycle Manager
         Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',

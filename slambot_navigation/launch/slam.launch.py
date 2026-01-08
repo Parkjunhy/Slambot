@@ -1,4 +1,3 @@
-# 파일: slambot_gazebo_sim_description/launch/slam_bringup.launch.py
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
