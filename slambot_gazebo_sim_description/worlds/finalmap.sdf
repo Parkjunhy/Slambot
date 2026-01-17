@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="dark_maze_world">
+    
+    <physics name="default_physics" type="tpe">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.0 0.0 0.0 1</background> <shadows>false</shadows>
+      <grid>true</grid>
+    </scene>
+
+    <light name="sun" type="directional">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0.1 0.1 -0.9</direction>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="complex_maze">
+      <static>true</static>
+      <link name="walls">
+        <visual name="visual_outer_north">
+          <pose>0 10 1 0 0 0</pose>
+          <geometry><box><size>20.8 0.4 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_outer_north">
+          <pose>0 10 1 0 0 0</pose>
+          <geometry><box><size>20.8 0.4 2</size></box></geometry>
+        </collision>
+
+        <visual name="visual_outer_south">
+          <pose>0 -10 1 0 0 0</pose>
+          <geometry><box><size>20.8 0.4 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_outer_south">
+          <pose>0 -10 1 0 0 0</pose>
+          <geometry><box><size>20.8 0.4 2</size></box></geometry>
+        </collision>
+
+        <visual name="visual_outer_west">
+          <pose>-10 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 20 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_outer_west">
+          <pose>-10 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 20 2</size></box></geometry>
+        </collision>
+
+        <visual name="visual_outer_east">
+          <pose>10 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 20 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_outer_east">
+          <pose>10 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 20 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_inner_1">
+          <pose>-3 3 1 0 0 0</pose>
+          <geometry><box><size>6 0.4 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_inner_1">
+          <pose>-3 3 1 0 0 0</pose>
+          <geometry><box><size>6 0.4 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_inner_2">
+          <pose>3 -3 1 0 0 0</pose>
+          <geometry><box><size>6 0.4 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_inner_2">
+          <pose>3 -3 1 0 0 0</pose>
+          <geometry><box><size>6 0.4 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_zigzag_1">
+          <pose>6 4 1 0 0 0</pose>
+          <geometry><box><size>0.4 8 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_zigzag_1">
+          <pose>6 4 1 0 0 0</pose>
+          <geometry><box><size>0.4 8 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_zigzag_2">
+          <pose>8 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 10 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_zigzag_2">
+          <pose>8 0 1 0 0 0</pose>
+          <geometry><box><size>0.4 10 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_long_1">
+          <pose>-6 -2 1 0 0 0</pose>
+          <geometry><box><size>0.4 12 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_long_1">
+          <pose>-6 -2 1 0 0 0</pose>
+          <geometry><box><size>0.4 12 2</size></box></geometry>
+        </collision>
+
+        <visual name="wall_cross_1">
+          <pose>-2 6 1 0 0 0</pose>
+          <geometry><box><size>8 0.4 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_cross_1">
+          <pose>-2 6 1 0 0 0</pose>
+          <geometry><box><size>8 0.4 2</size></box></geometry>
+        </collision>
+
+        <visual name="pillar_1">
+          <pose>-5 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_pillar_1">
+          <pose>-5 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+        </collision>
+
+        <visual name="pillar_2">
+          <pose>-2 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_pillar_2">
+          <pose>-2 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+        </collision>
+
+        <visual name="pillar_3">
+          <pose>1 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_pillar_3">
+          <pose>1 -7 1 0 0 0</pose>
+          <geometry><cylinder><radius>0.4</radius><length>2</length></cylinder></geometry>
+        </collision>
+
+        <visual name="trap_1">
+          <pose>4 7 1 0 0 0</pose>
+          <geometry><box><size>0.4 6 2</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+        <collision name="col_trap_1">
+          <pose>4 7 1 0 0 0</pose>
+          <geometry><box><size>0.4 6 2</size></box></geometry>
+        </collision>
+
+      </link>
+    </model>
+  </world>
+</sdf>

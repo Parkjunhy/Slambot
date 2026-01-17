@@ -39,7 +39,7 @@ class SlambotTeleop(Node):
 
     def _help_text(self) -> str:
         return (
-            f"  시작 모드: {self.mode}단, 퍼블리시 {self.cfg.publish_rate_hz:.0f}Hz\n"
+            f"  Start : {self.mode}단, Publish {self.cfg.publish_rate_hz:.0f}Hz\n"
         )
 
     def _current_mode_limits(self) -> SpeedMode:

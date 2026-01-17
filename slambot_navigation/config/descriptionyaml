@@ -1,13 +1,15 @@
 python3 -c "
 import cv2
 import numpy as np
-img = cv2.imread('mape_new.pgm', 0)
+img = cv2.imread('map_sim.pgm', 0)
 # 대비를 최대화하여 0(검정)과 255(흰색)로 변환
 img_norm = cv2.normalize(img, None, 0, 255, cv2.NORM_MINMAX)
 _, img_bin = cv2.threshold(img_norm, 127, 255, cv2.THRESH_BINARY)
-cv2.imwrite('mape_fix.pgm', img_bin)
-print('mape_fix.pgm 생성 완료!')
+cv2.imwrite('map_sim_fix.pgm', img_bin)
+print('map_sim_fix.pgm 생성 완료!')
 "
 
 
 ros2 run nav2_map_server map_saver_cli -f /home/jh/slambot_project/src/slambot_navigation/maps/mape_new
+
+sudo chronyc makestep

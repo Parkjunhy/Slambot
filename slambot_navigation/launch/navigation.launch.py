@@ -42,7 +42,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file',
-            default_value=PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params.yaml']),
+            default_value=PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params_simul.yaml']),
             description='Full path to nav2 params'
         ),
 
