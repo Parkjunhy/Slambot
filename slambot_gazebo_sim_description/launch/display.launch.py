@@ -11,7 +11,7 @@ def generate_launch_description():
     robotXacroName = 'slambot_gazebo_sim'
     namePackage = 'slambot_gazebo_sim_description'
     modelFileRelativePath = 'urdf/slambot_gazebo_sim.xacro'
-    pathWorldFile = os.path.join(get_package_share_directory(namePackage), 'worlds', 'mapworld.sdf')
+    pathWorldFile = os.path.join(get_package_share_directory(namePackage), 'worlds', 'finalmap.sdf')
 
     pathModelFile = os.path.join(get_package_share_directory(namePackage),modelFileRelativePath)
     robotDescription = xacro.process_file(pathModelFile).toxml()
@@ -81,7 +81,7 @@ def generate_launch_description():
     static_lidar_tf = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', '1',
+        arguments=['-0.0785', '0', '0.16', '0', '0', '0',
                 'base_link', 'slambot_gazebo_sim/base_link/gpu_lidar'],
         name='static_lidar_tf'
     )

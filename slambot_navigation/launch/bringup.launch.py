@@ -9,8 +9,8 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     slambot_nav_pkg = FindPackageShare('slambot_navigation')
     
-    default_map_file = PathJoinSubstitution([slambot_nav_pkg, 'maps', 'mape_new.yaml'])
-    default_params_file = PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params.yaml'])
+    default_map_file = PathJoinSubstitution([slambot_nav_pkg, 'maps', 'map_sim.yaml'])
+    default_params_file = PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params_simul.yaml'])
     
     localization_launch_path = PathJoinSubstitution([slambot_nav_pkg, 'launch', 'localization.launch.py'])
     navigation_launch_path = PathJoinSubstitution([slambot_nav_pkg, 'launch', 'navigation.launch.py'])
@@ -35,7 +35,7 @@ def generate_launch_description():
             description='Full path to nav2 params'
         ),
 
-        DeclareLaunchArgument('use_sim_time', default_value='true'),
+        DeclareLaunchArgument('use_sim_time', default_value='true'), #simul
         DeclareLaunchArgument('autostart', default_value='true'),
 
         IncludeLaunchDescription(

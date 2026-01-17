@@ -30,15 +30,15 @@ def generate_launch_description():
     return LaunchDescription([
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
         
-        DeclareLaunchArgument('use_sim_time', default_value='true'),
+        DeclareLaunchArgument('use_sim_time', default_value='false'),
         DeclareLaunchArgument(
             'map',
-            default_value=PathJoinSubstitution([slambot_nav_pkg, 'maps', 'mape_new.yaml']),
+            default_value=PathJoinSubstitution([slambot_nav_pkg, 'maps', 'map_sim.yaml']),
             description='Full path to map yaml file'
         ),
         DeclareLaunchArgument(
             'params_file',
-            default_value=PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params.yaml']),
+            default_value=PathJoinSubstitution([slambot_nav_pkg, 'config', 'nav2_params_simul.yaml']),
             description='Full path to nav2 params'
         ),
         DeclareLaunchArgument('autostart', default_value='true'),
